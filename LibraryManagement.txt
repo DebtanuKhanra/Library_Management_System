@@ -1,0 +1,133 @@
+
+
+using System;
+using System.Linq;
+
+class issuebook{
+ 
+    public string d;
+  
+    public void findbook(){
+        Console.WriteLine("These books are available: ");
+         Console.Write("-----------------------------\n");
+        
+        string [] bookname = new string []{"Stay Hungry Stay Foolis", "Rich Dad Poor Dad",
+                                           "The Glance Of Power", "Caravan of Dreams",
+                                           "A veilled Gazelle", "Harry Potter", 
+                                           "Tom And Jerry", "Animal Firm",
+                                           "Food And Pen"};
+
+         // David....
+        
+        for(int i=0;i<bookname.Length;i++)
+        {
+            Console.WriteLine($"{i+1} {bookname[i]}");
+        }
+
+        // David....
+        
+        Console.WriteLine("Enter the book name you want to issue :");
+        string inputBook = Console.ReadLine();
+        bool flag = false;        
+        
+        for(int i = 0; i<bookname.Length; i++) 
+        {
+            if(inputBook.ToLower().Equals(bookname[i].ToLower()))
+            {
+                flag = true;
+                bookname = bookname.Where(val => val != bookname[i]).ToArray();   // to delete the book name which is matched
+            }
+             
+        }
+        
+        if(flag)
+        {
+            Console.WriteLine($"{inputBook} book is available!");
+        }
+        else
+        {
+            Console.WriteLine($"{inputBook} book is not available!");
+            Environment.Exit(0);  
+        }
+        
+
+                 // David....
+        
+         Console.WriteLine("Please enter the exact date when you want to return : follow the \"dd/mm/yyyy\" format: ");
+            Console.Write("---------------------------------------------------------------------------------------\n");
+            d=Console.ReadLine();
+        
+        DateTime dateTime = DateTime.Now;
+        
+        Console.WriteLine($"Congratulation!, {inputBook} issued successfully on {dateTime} \nRequest to return on the date of {d}");
+        
+    }
+}
+
+
+           
+
+
+
+class returnbook : issuebook {
+  
+    public void Return(){
+        
+        // Console.WriteLine("Please enter the same date which was choosen by you as a return date : follow the \"dd/mm/yyyy\" format");
+        // put=Console.ReadLine();
+        
+        // if(d == put ) {
+        //      Console.WriteLine(" verified and Return successfully");
+        // }
+        // else {
+        //     Console.WriteLine("Sorry , the return date not match which date was selected by you ");
+        // }
+        
+        
+        Console.Write("Enter your name :");
+        string username = Console.ReadLine();
+        
+        Console.Write("Enter book name which you want to return :");
+        string returnBook = Console.ReadLine();
+        
+        Console.WriteLine($"{returnBook} is returned by {username}");
+       
+    }
+}
+
+
+               / David....
+
+class re_issueBook : issuebook
+{
+    
+}
+
+
+class LibraryManagement {
+  static void Main() {
+      
+    
+    Console.WriteLine("If you want to issue , Then press 1");
+    Console.WriteLine("If you want return book , Then press 2");
+    Console.WriteLine("If you want re-issue book , Then press 3");
+    Console.WriteLine("-----------------------------------------");
+    
+    issuebook I1 =new issuebook();
+    returnbook R1=new returnbook();
+    int num=int.Parse(Console.ReadLine());
+    switch(num)
+    {
+        case 1: 
+             I1.findbook();
+             break;
+        case 2:
+             R1.Return();
+             break;
+        default:
+             Console.WriteLine("Invalid Input");
+             break;
+    }
+  
+  }
+}
